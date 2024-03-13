@@ -1,0 +1,7 @@
+.searchBar {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    width: 250px;
+
+}

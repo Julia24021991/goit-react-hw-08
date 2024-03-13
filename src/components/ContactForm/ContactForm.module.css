@@ -1,0 +1,31 @@
+.allForm {
+    border: 3px solid #868282;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 250px;
+    text-align: start;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 20px;
+}
+
+.button {
+    margin: auto;
+    background-color: #dfd3d3;
+}
+
+.error {
+    color: #d62a2a;
+}
