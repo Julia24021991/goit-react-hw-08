@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
-import { ContactList } from "./ContactList/ContactList";
+import { ContactList } from './ContactList/ContactList';
 import { SearchBox } from './SearchBox/SearchBox';
 import { ContactForm } from './ContactForm/ContactForm';
 
-import "modern-normalize";
+import 'modern-normalize';
 import './App.css';
 
-export const App = () => {
+const App = () => {
   const getInitialContact = () => {
-    const savedContacts = window.localStorage.getItem("saved-contacts");
+    const savedContacts = window.localStorage.getItem('saved-contacts');
     if (savedContacts !== null) {
       return JSON.parse(savedContacts);
     }
@@ -23,15 +23,15 @@ export const App = () => {
 
   const [contacts, setContacts] = useState(getInitialContact());
 
-  const addContact = (newContact) => {
-    setContacts((prevContacts) => {
+  const addContact = newContact => {
+    setContacts(prevContacts => {
       return [...prevContacts, newContact];
     });
   };
 
-  const deleteContact = (id) => {
-    setContacts((prevContacts) => {
-      return prevContacts.filter((contact) => contact.id !== id);
+  const deleteContact = id => {
+    setContacts(prevContacts => {
+      return prevContacts.filter(contact => contact.id !== id);
     });
   };
 
@@ -39,9 +39,9 @@ export const App = () => {
     window.localStorage.setItem('saved-contacts', JSON.stringify(contacts));
   }, [contacts]);
 
-  const [filter, setFilter] = useState("");
+  const [filter, setFilter] = useState('');
 
-  const filteredContacts = contacts.filter((contact) =>
+  const filteredContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
 
@@ -54,3 +54,5 @@ export const App = () => {
     </div>
   );
 };
+
+export default App;
