@@ -1,19 +1,19 @@
 import { useDispatch } from 'react-redux';
 import { Suspense, lazy, useEffect } from 'react';
-// import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Navigation from './Navigation/Navigation';
-// import PrivateRoute from './Routes/PrivateRoute';
-// import RestrictedRoute from './Routes/RestrictedRoute';
+import PrivateRoute from './Routes/PrivateRoute';
+import RestrictedRoute from './Routes/RestrictedRoute';
 import { Toaster } from 'react-hot-toast';
 import Loader from './Loader/Loader';
 import { selectAuth } from '../redux/auth/selectors';
 import { refresh } from '../redux/auth/operations';
 
-// const HomePage = lazy(() => import('../pages/HomePage'));
-// const ContactsPage = lazy(() => import('../pages/ContactsPage'));
-// const RegisterPage = lazy(() => import('../pages/RegisterPage'));
-// const LogInPage = lazy(() => import('../pages/LogInPage'));
-// const NotFoundPage = lazy(() => import('../pages/NotFoundPage'));
+const HomePage = lazy(() => import('../pages/HomePage'));
+const ContactsPage = lazy(() => import('../pages/ContactsPage'));
+const RegisterPage = lazy(() => import('../pages/RegisterPage'));
+const LogInPage = lazy(() => import('../pages/LogInPage'));
+const NotFoundPage = lazy(() => import('../pages/NotFoundPage'));
 
 const App = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const App = () => {
     <div>
       <Navigation />
 
-      {/* <Suspense fallback={<Loader />}>
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route
@@ -46,7 +46,7 @@ const App = () => {
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-      </Suspense> */}
+      </Suspense>
 
       <Toaster />
     </div>
