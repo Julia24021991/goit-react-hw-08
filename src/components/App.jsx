@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-// import { Suspense, lazy, useEffect } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 // import { Route, Routes } from 'react-router-dom';
 import Navigation from './Navigation/Navigation';
 // import PrivateRoute from './Routes/PrivateRoute';
