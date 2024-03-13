@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ContactList } from './ContactList/ContactList';
-import { SearchBox } from './SearchBox/SearchBox';
+import SearchBox from './SearchBox/SearchBox';
 import { ContactForm } from './ContactForm/ContactForm';
 
 import 'modern-normalize';
