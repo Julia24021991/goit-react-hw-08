@@ -1,31 +1,59 @@
-.allForm {
-    border: 3px solid #868282;
-    border-radius: 5px;
-    padding: 15px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    width: 250px;
-    text-align: start;
-}
-
-.buttonContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .form {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    margin: 20px;
+    align-items: center;
+    max-width: 250px;
+    padding: 12px 24px;
+    border: 1px solid #0d47a1;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
+.item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.label {
+    margin-bottom: 5px;
+}
+
+.input {
+    padding: 10px;
+    border: 1px solid #0d47a1;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.input:focus {
+    cursor: pointer;
+    background-color: #bbdefb;
+    color: #111;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .button {
-    margin: auto;
-    background-color: #dfd3d3;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #bbdefb;
+}
+
+.button:hover,
+.button:focus {
+    cursor: pointer;
+    background-color: #2196f3;
+    color: #fff;
+    transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .error {
-    color: #d62a2a;
+    color: #F1041B;
 }
