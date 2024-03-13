@@ -1,56 +1,54 @@
-import { useState, useEffect } from 'react';
-import { ContactList } from './ContactList/ContactList';
-import SearchBox from './SearchBox/SearchBox';
-import { ContactForm } from './ContactForm/ContactForm';
+import { useDispatch } from 'react-redux';
+import { Suspense, lazy, useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Navigation from './Navigation/Navigation';
+import PrivateRoute from './Routes/PrivateRoute';
+import RestrictedRoute from './Routes/RestrictedRoute';
+import { Toaster } from 'react-hot-toast';
+import Loader from './Loader/Loader';
+import { selectAuth } from '../redux/auth/selectors';
+import { refresh } from '../redux/auth/operations';
 
-import 'modern-normalize';
-import './App.css';
+const HomePage = lazy(() => import('../pages/HomePage'));
+const ContactsPage = lazy(() => import('../pages/ContactsPage'));
+const RegisterPage = lazy(() => import('../pages/RegisterPage'));
+const LogInPage = lazy(() => import('../pages/LogInPage'));
+const NotFoundPage = lazy(() => import('../pages/NotFoundPage'));
 
 const App = () => {
-  const getInitialContact = () => {
-    const savedContacts = window.localStorage.getItem('saved-contacts');
-    if (savedContacts !== null) {
-      return JSON.parse(savedContacts);
-    }
-
-    return [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ];
-  };
-
-  const [contacts, setContacts] = useState(getInitialContact());
-
-  const addContact = newContact => {
-    setContacts(prevContacts => {
-      return [...prevContacts, newContact];
-    });
-  };
-
-  const deleteContact = id => {
-    setContacts(prevContacts => {
-      return prevContacts.filter(contact => contact.id !== id);
-    });
-  };
+  const dispatch = useDispatch();
+  const { isRefreshing } = selectAuth;
 
   useEffect(() => {
-    window.localStorage.setItem('saved-contacts', JSON.stringify(contacts));
-  }, [contacts]);
+    dispatch(refresh());
+  }, [dispatch]);
 
-  const [filter, setFilter] = useState('');
-
-  const filteredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
-
-  return (
+  return isRefreshing ? (
+    <Loader />
+  ) : (
     <div>
-      <h1>Phonebook</h1>
-      <ContactForm onAdd={addContact} />
-      <SearchBox value={filter} onChange={setFilter} />
-      <ContactList contacts={filteredContacts} onDelete={deleteContact} />
+      <Navigation />
+
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/register"
+            element={<RestrictedRoute redirectTo="/contacts" component={<RegisterPage />} />}
+          />
+          <Route
+            path="/login"
+            element={<RestrictedRoute redirectTo="/contacts" component={<LogInPage />} />}
+          />
+          <Route
+            path="/contacts"
+            element={<PrivateRoute redirectTo="/login" component={<ContactsPage />} />}
+          />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
+
+      <Toaster />
     </div>
   );
 };
